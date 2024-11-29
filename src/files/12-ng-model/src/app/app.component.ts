@@ -8,7 +8,6 @@ import { TotalPricePipe } from './total-price.pipe';
 
 @Component({
   selector: 'mcf-root',
-  standalone: true,
   imports: [DecimalPipe, UpperCasePipe, CoffeeOverviewComponent, TotalPricePipe],
   template: `
     <div class="total">

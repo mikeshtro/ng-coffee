@@ -4,7 +4,6 @@ import { CoffeeOverviewComponent } from './pick-coffee/coffee-overview/coffee-ov
 
 @Component({
   selector: 'mcf-root',
-  standalone: true,
   imports: [CoffeeOverviewComponent],
   template: `
     <span class="coffee">Espresso</span>

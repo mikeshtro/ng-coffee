@@ -8,10 +8,7 @@ import { CoffeeType } from './coffee-type';
   standalone: true,
 })
 export class TotalPricePipe implements PipeTransform {
-  transform(
-    orderedCoffees: Map<CoffeeType, number>,
-    coffeePrices: CoffeePrice[]
-  ): number {
+  transform(orderedCoffees: Map<CoffeeType, number>, coffeePrices: CoffeePrice[]): number {
     let totalPrice = 0;
 
     for (const price of coffeePrices) {

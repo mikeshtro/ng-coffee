@@ -7,7 +7,6 @@ import { CoffeeOverviewComponent } from './pick-coffee/coffee-overview/coffee-ov
 
 @Component({
   selector: 'mcf-root',
-  standalone: true,
   imports: [DecimalPipe, UpperCasePipe, CoffeeOverviewComponent],
   template: `
     <div class="total">Total price: {{ getTotalPrice() | number: '1.0-1' }}</div>
