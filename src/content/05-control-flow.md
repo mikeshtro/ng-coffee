@@ -47,7 +47,7 @@ Don't forget to import the `CoffeeType` type.
 import { Component } from '@angular/core';
 
 + import { CoffeeType } from './coffee-type';
-import { CoffeeOverviewComponent } from './pick-coffee/coffee-overview/coffee-overview.component';
+  import { CoffeeOverviewComponent } from './pick-coffee/coffee-overview/coffee-overview.component';
 ```
 
 ## Step 3
