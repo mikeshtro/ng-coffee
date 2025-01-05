@@ -5,7 +5,6 @@ import { CoffeeType } from './coffee-type';
 
 @Pipe({
   name: 'totalPrice',
-  standalone: true,
 })
 export class TotalPricePipe implements PipeTransform {
   transform(orderedCoffees: Map<CoffeeType, number>, coffeePrices: CoffeePrice[]): number {

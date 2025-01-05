@@ -22,7 +22,6 @@ pipe's transform method. Both `orderedCoffees` and `coffeePrices` have to be pas
 +
 + @Pipe({
 +   name: 'totalPrice',
-+   standalone: true,
 + })
 + export class TotalPricePipe implements PipeTransform {
 +   transform(

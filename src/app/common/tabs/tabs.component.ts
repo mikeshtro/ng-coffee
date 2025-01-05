@@ -2,7 +2,6 @@ import { Component, computed, input, model } from '@angular/core';
 
 @Component({
   selector: 'homework-tabs',
-  standalone: true,
   template: `
     @for (file of displayFiles(); track file.fullName) {
       <button [class.active]="file.fullName === openFile()" (click)="openFile.set(file.fullName)">

@@ -16,7 +16,6 @@ import { WebContainerService } from '../web-container/web-container.service';
 
 @Component({
   selector: 'homework-index-page',
-  standalone: true,
   template: `
     <div class="instructions">
       <router-outlet />

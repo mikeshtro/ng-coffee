@@ -6,7 +6,6 @@ import { FileContent } from './file-content';
 
 @Component({
   selector: 'homework-multi-editor',
-  standalone: true,
   template: `
     <div>
       <span class="header">

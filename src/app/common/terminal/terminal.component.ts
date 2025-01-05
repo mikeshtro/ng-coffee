@@ -16,7 +16,6 @@ import { TerminalSize } from './terminal-size';
 
 @Component({
   selector: 'homework-terminal',
-  standalone: true,
   template: '',
   styles: `
     :host {

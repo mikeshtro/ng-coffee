@@ -3,7 +3,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'homework-preview',
-  standalone: true,
   template: `
     <span class="header">
       Preview

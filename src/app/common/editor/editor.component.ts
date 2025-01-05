@@ -15,7 +15,6 @@ import { basicSetup } from 'codemirror';
 
 @Component({
   selector: 'homework-editor',
-  standalone: true,
   template: '',
   styles: `
     :host {

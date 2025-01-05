@@ -12,7 +12,6 @@ import { FileLoaderService } from '../../file-loader/file-loader.service';
 
 @Component({
   selector: 'homework-index-slug',
-  standalone: true,
   template: `
     <div class="markdown">
       @if (content()) {
