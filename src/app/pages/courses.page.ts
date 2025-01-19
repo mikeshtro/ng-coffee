@@ -1,8 +1,7 @@
 import { Component, effect, inject, OnInit, signal, untracked } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { DirectoryNode, FileNode, FileSystemTree } from '@webcontainer/api';
-import { map, OperatorFunction, share } from 'rxjs';
 
 import { FileContent } from '../common/mutli-editor/file-content';
 import { MultiEditorComponent } from '../common/mutli-editor/multi-editor.component';
