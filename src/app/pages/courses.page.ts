@@ -1,7 +1,7 @@
 import { Component, effect, inject, OnInit, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
-import { DirectoryNode, FileNode, FileSystemTree } from '@webcontainer/api';
+import { DirectoryNode, FileNode, FileSystemTree, SymlinkNode } from '@webcontainer/api';
 
 import { FileContent } from '../common/mutli-editor/file-content';
 import { MultiEditorComponent } from '../common/mutli-editor/multi-editor.component';
@@ -155,7 +155,12 @@ export default class IndexPageComponent implements OnInit {
     }
   }
 
-  private isFileNode(node: DirectoryNode | FileNode): node is FileNode {
-    return Object.prototype.hasOwnProperty.call(node, 'file');
+  private isFileNode(node: DirectoryNode | FileNode | SymlinkNode): node is FileNode {
+    const hasFileProperty = !Object.prototype.hasOwnProperty.call(node, 'file');
+    if (hasFileProperty) {
+      return false;
+    }
+    const nodeWithFile = node as { file: unknown };
+    return Object.prototype.hasOwnProperty.call(nodeWithFile.file, 'contents');
   }
 }
