@@ -6,7 +6,7 @@ import {
 } from '@analogjs/content';
 import { Component, computed, effect, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { FileLoaderService } from '../../file-loader/file-loader.service';
 
@@ -58,8 +58,11 @@ import { FileLoaderService } from '../../file-loader/file-loader.service';
   imports: [RouterLink, MarkdownComponent],
 })
 export default class IndexSlugPageComponent {
+  private readonly course = inject(ActivatedRoute).snapshot.paramMap.get('course') ?? '';
   protected readonly allContents = injectContentFiles<ContentFile>();
-  protected readonly content = toSignal(injectContent());
+  protected readonly content = toSignal(
+    injectContent({ param: 'slug', subdirectory: this.course })
+  );
   private readonly fileLoaderService = inject(FileLoaderService);
 
   readonly slug = input.required<string>();
@@ -81,6 +84,6 @@ export default class IndexSlugPageComponent {
   });
 
   constructor() {
-    effect(() => this.fileLoaderService.loadFiles(this.slug()));
+    effect(() => this.fileLoaderService.loadFiles(this.course, this.slug()));
   }
 }

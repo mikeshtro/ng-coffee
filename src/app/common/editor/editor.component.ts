@@ -6,7 +6,6 @@ import {
   inject,
   model,
   OnDestroy,
-  untracked,
 } from '@angular/core';
 import { angular } from '@codemirror/lang-angular';
 import { javascript } from '@codemirror/lang-javascript';
@@ -49,7 +48,7 @@ export class EditorComponent implements OnDestroy {
       EditorView.updateListener.of(v => {
         const value = this.value();
         if (value !== v.view.state.doc.toString()) {
-          untracked(() => this.value.set(v.view.state.doc.toString()));
+          this.value.set(v.view.state.doc.toString());
         }
       }),
     ],

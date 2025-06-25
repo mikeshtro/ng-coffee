@@ -99,7 +99,7 @@ export default class IndexPageComponent implements OnInit {
         return;
       }
       const fileContents = this.mapFiles(files);
-      untracked(() => this.openFiles.set(fileContents));
+      this.openFiles.set(fileContents);
       if (this.webContainerService.isReady()) {
         await this.webContainerService.mount(files.value);
         const openFiles = untracked(() => this.openFiles());

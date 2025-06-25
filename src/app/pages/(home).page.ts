@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
   template: `
     <h1>Welcome to MorniNG coffee</h1>
     <main>
-      <a class="link" routerLink="courses/00-introduction">
+      <a class="link" routerLink="courses/angular-for-backend-developers/00-introduction">
         <span>Angular</span>
         <span>for backend devs</span>
       </a>

@@ -1,4 +1,4 @@
-import { Component, computed, effect, model, signal, untracked } from '@angular/core';
+import { Component, computed, effect, model, signal } from '@angular/core';
 
 import { EditorComponent } from '../editor/editor.component';
 import { TabsComponent } from '../tabs/tabs.component';
@@ -72,11 +72,9 @@ export class MultiEditorComponent {
   constructor() {
     effect(() => {
       const newFiles = this.files();
-      untracked(() => {
-        this.unsavedFiles.set(newFiles ?? []);
-        this.openFile =
-          newFiles?.find(file => file.fileName === this.openFile?.fileName) ?? newFiles?.at(0);
-      });
+      this.unsavedFiles.set(newFiles ?? []);
+      this.openFile =
+        newFiles?.find(file => file.fileName === this.openFile?.fileName) ?? newFiles?.at(0);
     });
   }
 

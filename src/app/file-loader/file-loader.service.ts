@@ -9,18 +9,18 @@ import { WithSlug } from './with-slug';
 export class FileLoaderService {
   private readonly httpClient = inject(HttpClient);
 
-  private readonly load$ = new Subject<string>();
+  private readonly load$ = new Subject<{ course: string; slug: string }>();
 
   readonly files$ = this.load$.pipe(this.getFiles());
 
-  loadFiles(path: string): void {
-    this.load$.next(path);
+  loadFiles(course: string, slug: string): void {
+    this.load$.next({ course, slug });
   }
 
-  private getFiles(): OperatorFunction<string, WithSlug<FileSystemTree>> {
-    return switchMap(slug =>
+  private getFiles(): OperatorFunction<{ course: string; slug: string }, WithSlug<FileSystemTree>> {
+    return switchMap(({ course, slug }) =>
       this.httpClient
-        .get<FileSystemTree>(`${slug}.json`)
+        .get<FileSystemTree>(`${course}/${slug}.json`)
         .pipe(this.processError(), this.withSlug(slug))
     );
   }
