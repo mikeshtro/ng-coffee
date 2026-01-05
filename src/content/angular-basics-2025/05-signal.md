@@ -16,6 +16,9 @@ Update the `amount` property to a signal and update `orderCoffee` method to upda
 signal value
 
 ```diff
+- import { Component } from '@angular/core';
++ import { Component, signal } from '@angular/core';
+
   export class CoffeeOverview {
 -   protected amount = 0;
 +   protected readonly amount = signal(0);

@@ -6,6 +6,10 @@ import { RouterLink } from '@angular/router';
   template: `
     <h1>Welcome to MorniNG coffee</h1>
     <main>
+      <a class="link" routerLink="courses/angular-basics-2025/00-introduction">
+        <span>Angular basics</span>
+        <span>2025</span>
+      </a>
       <a class="link" routerLink="courses/angular-for-backend-developers/00-introduction">
         <span>Angular</span>
         <span>for backend devs</span>
@@ -31,13 +35,16 @@ import { RouterLink } from '@angular/router';
     }
 
     main {
+      display: flex;
       flex: 1;
+      gap: 2rem;
     }
 
     .link {
       display: flex;
       flex-direction: column;
       align-items: center;
+      height: fit-content;
       gap: 1em;
       border: 1px solid var(--color-darker);
       text-decoration: none;
