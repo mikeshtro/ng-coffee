@@ -66,6 +66,6 @@ Do the same for CoffeeOverview
 and the HTML template
 
 ```diff
-- <span>Price: {{ computedPrice }}</span>
-+ <span>Price {{ computedPrice | number: '1.0-1' }}</span>
+- <span>Price: {{ computedPrice() }}</span>
++ <span>Price {{ computedPrice() | number: '1.0-1' }}</span>
 ```
