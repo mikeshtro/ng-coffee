@@ -1,0 +1,5 @@
+<label class="label">
+  <span>Amount:</span>
+  <input type="number" [ngModel]="value()" (ngModelChange)="orderCoffee($event)" />
+</label>
+<button (click)="orderCoffee(value() + 1)">Give me more</button>
