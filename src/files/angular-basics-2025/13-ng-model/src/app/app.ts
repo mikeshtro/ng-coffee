@@ -10,7 +10,7 @@ import { TotalPrice } from './total-price';
   imports: [DecimalPipe, UpperCasePipe, CoffeeOverview, TotalPrice],
   template: `
     <div class="total">
-      Total price: {{ orderedCoffees | totalPrice: coffees | number: '1-0.1' }}
+      Total price: {{ orderedCoffees | totalPrice: coffees | number: '1.0-1' }}
     </div>
     <div>
       @for (coffee of coffees; track coffee.id) {
