@@ -2,32 +2,29 @@ import { Component, effect, inject, OnInit, signal, untracked } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { DirectoryNode, FileNode, FileSystemTree, SymlinkNode } from '@webcontainer/api';
-
 import { FileContent } from '../common/mutli-editor/file-content';
-import { MultiEditorComponent } from '../common/mutli-editor/multi-editor.component';
-import { PreviewComponent } from '../common/preview/preview.component';
+import { MultiEditor } from '../common/mutli-editor/multi-editor';
+import { Preview } from '../common/preview/preview';
+import { Terminal } from '../common/terminal/terminal';
 import { TerminalSize } from '../common/terminal/terminal-size';
-import { TerminalComponent } from '../common/terminal/terminal.component';
 import { fileDictionary } from '../file-loader/file-dictionary';
 import { FileLoaderService } from '../file-loader/file-loader.service';
 import { WithSlug } from '../file-loader/with-slug';
 import { WebContainerService } from '../web-container/web-container.service';
 
 @Component({
-  selector: 'homework-index-page',
+  selector: 'ngc-index-page',
+  imports: [RouterOutlet, Terminal, MultiEditor, Preview],
   template: `
     <div class="instructions">
       <router-outlet />
     </div>
     <div class="ide">
       <div class="code">
-        <homework-multi-editor
-          [files]="openFiles()"
-          (filesChange)="saveEditorValue($event ?? [])"
-        />
-        <homework-preview #preview [url]="previewUrl()" />
+        <ngc-multi-editor [files]="openFiles()" (filesChange)="saveEditorValue($event ?? [])" />
+        <ngc-preview #preview [url]="previewUrl()" />
       </div>
-      <homework-terminal
+      <ngc-terminal
         class="terminal"
         [data]="terminalData()"
         (dataChange)="setTerminalData($event)"
@@ -70,9 +67,8 @@ import { WebContainerService } from '../web-container/web-container.service';
       flex: 2;
     }
   `,
-  imports: [RouterOutlet, TerminalComponent, MultiEditorComponent, PreviewComponent],
 })
-export default class IndexPageComponent implements OnInit {
+export default class IndexPage implements OnInit {
   private readonly webContainerService = inject(WebContainerService);
   private readonly fileLoaderService = inject(FileLoaderService);
 

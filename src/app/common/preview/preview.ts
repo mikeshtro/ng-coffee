@@ -2,7 +2,7 @@ import { Component, computed, ElementRef, inject, input, viewChild } from '@angu
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'homework-preview',
+  selector: 'ngc-preview',
   template: `
     <span class="header">
       Preview
@@ -59,7 +59,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     }
   `,
 })
-export class PreviewComponent {
+export class Preview {
   private readonly sanitizer = inject(DomSanitizer);
 
   readonly url = input<string>();

@@ -15,7 +15,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "homework",
+            "prefix": "ngc",
             "style": "camelCase"
           }
         ],
@@ -23,7 +23,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "homework",
+            "prefix": "ngc",
             "style": "kebab-case"
           }
         ],

@@ -44,3 +44,6 @@ public/angular-for-backend-developers
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment files
+.env*

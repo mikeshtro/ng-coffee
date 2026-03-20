@@ -13,7 +13,7 @@ import { EditorView } from '@codemirror/view';
 import { basicSetup } from 'codemirror';
 
 @Component({
-  selector: 'homework-editor',
+  selector: 'ngc-editor',
   template: '',
   styles: `
     :host {
@@ -29,7 +29,7 @@ import { basicSetup } from 'codemirror';
     }
   `,
 })
-export class EditorComponent implements OnDestroy {
+export class Editor implements OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   readonly value = model<string>();

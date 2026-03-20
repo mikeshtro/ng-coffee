@@ -1,11 +1,12 @@
 import { Component, computed, effect, model, signal } from '@angular/core';
 
-import { EditorComponent } from '../editor/editor.component';
-import { TabsComponent } from '../tabs/tabs.component';
+import { Editor } from '../editor/editor';
+import { Tabs } from '../tabs/tabs';
 import { FileContent } from './file-content';
 
 @Component({
-  selector: 'homework-multi-editor',
+  selector: 'ngc-multi-editor',
+  imports: [Tabs, Editor],
   template: `
     <div>
       <span class="header">
@@ -21,13 +22,13 @@ import { FileContent } from './file-content';
           </svg>
         </button>
       </span>
-      <homework-tabs
+      <ngc-tabs
         [files]="fileNames()"
         [openFile]="openFile?.fileName"
         (openFileChange)="changeFile($event)"
       />
     </div>
-    <homework-editor [value]="openFile?.content ?? ''" (valueChange)="updateFile($event)" />
+    <ngc-editor [value]="openFile?.content ?? ''" (valueChange)="updateFile($event)" />
   `,
   styles: `
     :host {
@@ -58,9 +59,8 @@ import { FileContent } from './file-content';
       stroke: var(--color-dark);
     }
   `,
-  imports: [TabsComponent, EditorComponent],
 })
-export class MultiEditorComponent {
+export class MultiEditor {
   readonly files = model<FileContent[]>();
 
   protected readonly fileNames = computed(() => this.files()?.map(({ fileName }) => fileName));

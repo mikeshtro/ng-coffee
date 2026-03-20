@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'homework-root',
+  selector: 'ngc-root',
   imports: [RouterOutlet],
   template: `<router-outlet></router-outlet>`,
   styles: `
@@ -13,4 +13,4 @@ import { RouterOutlet } from '@angular/router';
     }
   `,
 })
-export class AppComponent {}
+export class App {}

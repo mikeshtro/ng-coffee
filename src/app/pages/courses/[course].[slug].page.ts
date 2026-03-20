@@ -11,7 +11,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FileLoaderService } from '../../file-loader/file-loader.service';
 
 @Component({
-  selector: 'homework-index-slug',
+  selector: 'ngc-index-slug',
   template: `
     <div class="markdown">
       @if (content()) {
@@ -57,7 +57,7 @@ import { FileLoaderService } from '../../file-loader/file-loader.service';
   `,
   imports: [RouterLink, MarkdownComponent],
 })
-export default class IndexSlugPageComponent {
+export default class IndexSlugPage {
   private readonly course = inject(ActivatedRoute).snapshot.paramMap.get('course') ?? '';
   protected readonly allContents = injectContentFiles<ContentFile>();
   protected readonly content = toSignal(

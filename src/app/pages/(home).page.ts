@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'homework-home-page',
+  selector: 'ngc-home-page',
   template: `
     <h1>Welcome to MorniNG coffee</h1>
     <main>
@@ -55,4 +55,4 @@ import { RouterLink } from '@angular/router';
   `,
   imports: [RouterLink],
 })
-export default class HomePageComponent {}
+export default class HomePage {}

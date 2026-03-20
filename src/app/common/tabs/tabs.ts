@@ -1,7 +1,7 @@
 import { Component, computed, input, model } from '@angular/core';
 
 @Component({
-  selector: 'homework-tabs',
+  selector: 'ngc-tabs',
   template: `
     @for (file of displayFiles(); track file.fullName) {
       <button [class.active]="file.fullName === openFile()" (click)="openFile.set(file.fullName)">
@@ -30,7 +30,7 @@ import { Component, computed, input, model } from '@angular/core';
     }
   `,
 })
-export class TabsComponent {
+export class Tabs {
   readonly files = input<string[]>();
 
   readonly openFile = model<string>();

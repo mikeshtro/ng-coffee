@@ -11,21 +11,25 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     mainFields: ['module'],
   },
-  plugins: [analog({ ssr: false, content: { prismOptions: { additionalLangs: ['diff'] } } })],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: ['src/test-setup.ts'],
-    include: ['**/*.spec.ts'],
-    reporters: ['default'],
-  },
-  define: {
-    'import.meta.vitest': mode !== 'production',
-  },
   server: {
     headers: {
       'Cross-Origin-Embedder-Policy': 'require-corp',
       'Cross-Origin-Opener-Policy': 'same-origin',
     },
   },
+  plugins: [
+    analog({
+      ssr: false,
+      static: true,
+      prerender: {
+        routes: [],
+      },
+      content: {
+        highlighter: 'prism',
+        prismOptions: {
+          additionalLangs: ['diff'],
+        },
+      },
+    }),
+  ],
 }));

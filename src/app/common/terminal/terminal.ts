@@ -10,12 +10,12 @@ import {
   output,
 } from '@angular/core';
 import { FitAddon } from '@xterm/addon-fit';
-import { Terminal } from '@xterm/xterm';
+import { Terminal as xtermTerminal } from '@xterm/xterm';
 
 import { TerminalSize } from './terminal-size';
 
 @Component({
-  selector: 'homework-terminal',
+  selector: 'ngc-terminal',
   template: '',
   styles: `
     :host {
@@ -24,7 +24,7 @@ import { TerminalSize } from './terminal-size';
     }
   `,
 })
-export class TerminalComponent implements OnInit, OnDestroy {
+export class Terminal implements OnInit, OnDestroy {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly data = input<string>();
@@ -32,7 +32,7 @@ export class TerminalComponent implements OnInit, OnDestroy {
   readonly sizeChange = output<TerminalSize>();
   readonly dataChange = output<string>();
 
-  private readonly terminal = new Terminal({
+  private readonly terminal = new xtermTerminal({
     convertEol: true,
     theme: {
       background: '#fefdfc',
