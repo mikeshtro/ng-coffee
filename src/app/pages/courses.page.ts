@@ -1,4 +1,12 @@
-import { Component, effect, inject, OnInit, signal, untracked } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  linkedSignal,
+  OnInit,
+  untracked,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { DirectoryNode, FileNode, FileSystemTree, SymlinkNode } from '@webcontainer/api';
@@ -7,9 +15,8 @@ import { MultiEditor } from '../common/mutli-editor/multi-editor';
 import { Preview } from '../common/preview/preview';
 import { Terminal } from '../common/terminal/terminal';
 import { TerminalSize } from '../common/terminal/terminal-size';
-import { fileDictionary } from '../file-loader/file-dictionary';
+import { fileDictionary } from '../file-loader/file-dictionary/file-dictionary';
 import { FileLoaderService } from '../file-loader/file-loader.service';
-import { WithSlug } from '../file-loader/with-slug';
 import { WebContainerService } from '../web-container/web-container.service';
 
 @Component({
@@ -78,7 +85,15 @@ export default class IndexPage implements OnInit {
 
   protected readonly previewUrl = this.webContainerService.url;
 
-  protected readonly openFiles = signal<FileContent[]>([]);
+  protected readonly openFiles = linkedSignal(
+    computed(() => {
+      const files = this.files();
+      if (files == null) {
+        return [];
+      }
+      return this.mapFiles(files);
+    })
+  );
 
   constructor() {
     effect(() => {
@@ -94,8 +109,6 @@ export default class IndexPage implements OnInit {
       if (files == null) {
         return;
       }
-      const fileContents = this.mapFiles(files);
-      this.openFiles.set(fileContents);
       if (this.webContainerService.isReady()) {
         await this.webContainerService.mount(files.value);
         const openFiles = untracked(() => this.openFiles());
@@ -120,10 +133,10 @@ export default class IndexPage implements OnInit {
     this.openFiles.set(openFiles);
   }
 
-  private mapFiles(tree: WithSlug<FileSystemTree>): FileContent[] {
+  private mapFiles(tree: { course: string; slug: string; value: FileSystemTree }): FileContent[] {
     const result: FileContent[] = [];
 
-    for (const fileName of fileDictionary[tree.slug] ?? []) {
+    for (const fileName of fileDictionary[tree.course]?.[tree.slug] ?? []) {
       const path = fileName.split('/');
       const content = this.getFileContent(path, tree.value);
       if (content != null) {

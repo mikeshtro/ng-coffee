@@ -12,6 +12,7 @@ import { FileLoaderService } from '../../file-loader/file-loader.service';
 
 @Component({
   selector: 'ngc-index-slug',
+  imports: [RouterLink, MarkdownComponent],
   template: `
     <div class="markdown">
       @if (content()) {
@@ -55,11 +56,13 @@ import { FileLoaderService } from '../../file-loader/file-loader.service';
       padding: 0.75rem 2rem;
     }
   `,
-  imports: [RouterLink, MarkdownComponent],
 })
 export default class IndexSlugPage {
   private readonly course = inject(ActivatedRoute).snapshot.paramMap.get('course') ?? '';
-  protected readonly allContents = injectContentFiles<ContentFile>();
+  private readonly allContents = injectContentFiles<ContentFile>();
+  private readonly courseContents = this.allContents.filter(content =>
+    content.filename.startsWith(`src/content/${this.course}/`)
+  );
   protected readonly content = toSignal(
     injectContent({ param: 'slug', subdirectory: this.course })
   );
@@ -68,7 +71,7 @@ export default class IndexSlugPage {
   readonly slug = input.required<string>();
 
   private readonly contentIndex = computed(
-    () => this.allContents.findIndex(content => content.slug === this.content()?.slug) ?? -1
+    () => this.courseContents.findIndex(content => content.slug === this.content()?.slug) ?? -1
   );
 
   protected readonly previousLink = computed(() => {
@@ -76,11 +79,11 @@ export default class IndexSlugPage {
       return undefined;
     }
 
-    return this.allContents.at(this.contentIndex() - 1)?.slug;
+    return this.courseContents.at(this.contentIndex() - 1)?.slug;
   });
 
   protected readonly nextLink = computed(() => {
-    return this.allContents.at(this.contentIndex() + 1)?.slug;
+    return this.courseContents.at(this.contentIndex() + 1)?.slug;
   });
 
   constructor() {

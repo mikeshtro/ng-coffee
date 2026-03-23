@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { FileSystemTree } from '@webcontainer/api';
-import { catchError, EMPTY, map, OperatorFunction, pipe, Subject, switchMap } from 'rxjs';
-
-import { WithSlug } from './with-slug';
+import { catchError, EMPTY, map, OperatorFunction, Subject, switchMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class FileLoaderService {
@@ -17,16 +15,16 @@ export class FileLoaderService {
     this.load$.next({ course, slug });
   }
 
-  private getFiles(): OperatorFunction<{ course: string; slug: string }, WithSlug<FileSystemTree>> {
+  private getFiles(): OperatorFunction<
+    { course: string; slug: string },
+    { course: string; slug: string; value: FileSystemTree }
+  > {
     return switchMap(({ course, slug }) =>
-      this.httpClient
-        .get<FileSystemTree>(`${course}/${slug}.json`)
-        .pipe(this.processError(), this.withSlug(slug))
+      this.httpClient.get<FileSystemTree>(`${course}/${slug}.json`).pipe(
+        this.processError(),
+        map(value => ({ course, slug, value }))
+      )
     );
-  }
-
-  private withSlug<T>(slug: string): OperatorFunction<T, WithSlug<T>> {
-    return pipe(map(value => ({ slug, value })));
   }
 
   private processError<T>(): OperatorFunction<T, T | never> {
