@@ -38,6 +38,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+public/angular-basics-2025
 public/angular-for-backend-developers
 **/node_modules
 
