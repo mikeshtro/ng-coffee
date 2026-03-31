@@ -24,9 +24,6 @@ export default defineConfig(({ mode }) => ({
       prerender: {
         routes: [],
       },
-      nitro: {
-        preset: 'vercel',
-      },
       content: {
         highlighter: 'prism',
         prismOptions: {
