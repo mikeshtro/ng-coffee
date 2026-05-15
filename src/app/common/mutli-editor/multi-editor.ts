@@ -7,6 +7,9 @@ import { FileContent } from './file-content';
 @Component({
   selector: 'ngc-multi-editor',
   imports: [Tabs, Editor],
+  host: {
+    '(keydown)': 'onSave($event)',
+  },
   template: `
     <div>
       <span class="header">
@@ -90,6 +93,13 @@ export class MultiEditor {
           : file
       )
     );
+  }
+
+  protected onSave(event: KeyboardEvent): void {
+    if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+      event.preventDefault();
+      this.saveFiles();
+    }
   }
 
   protected saveFiles(): void {

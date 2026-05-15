@@ -7,9 +7,11 @@ import {
   model,
   OnDestroy,
 } from '@angular/core';
+import { indentWithTab } from '@codemirror/commands';
 import { angular } from '@codemirror/lang-angular';
 import { javascript } from '@codemirror/lang-javascript';
-import { EditorView } from '@codemirror/view';
+import { indentUnit } from '@codemirror/language';
+import { EditorView, keymap } from '@codemirror/view';
 import { basicSetup } from 'codemirror';
 
 @Component({
@@ -45,6 +47,8 @@ export class Editor implements OnDestroy {
       basicSetup,
       javascript({ typescript: true }),
       angular(),
+      indentUnit.of('  '),
+      keymap.of([indentWithTab]),
       EditorView.updateListener.of(v => {
         const value = this.value();
         if (value !== v.view.state.doc.toString()) {
