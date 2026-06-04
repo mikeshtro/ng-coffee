@@ -1,8 +1,8 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, Service, signal } from '@angular/core';
 import { FileSystemTree, WebContainer, WebContainerProcess } from '@webcontainer/api';
 import { BehaviorSubject } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class WebContainerService {
   private processWriter: WritableStreamDefaultWriter<string> | undefined;
 

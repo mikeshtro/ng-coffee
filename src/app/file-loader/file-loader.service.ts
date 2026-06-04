@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { FileSystemTree } from '@webcontainer/api';
 import { catchError, EMPTY, map, OperatorFunction, Subject, switchMap } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class FileLoaderService {
   private readonly httpClient = inject(HttpClient);
 
