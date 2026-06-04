@@ -4,7 +4,7 @@ import {
   injectContentFiles,
   MarkdownComponent,
 } from '@analogjs/content';
-import { Component, computed, effect, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
@@ -28,6 +28,7 @@ import { FileLoaderService } from '../../file-loader/file-loader.service';
       }
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     :host {
       display: flex;

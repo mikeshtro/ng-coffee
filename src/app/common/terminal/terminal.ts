@@ -8,6 +8,7 @@ import {
   OnDestroy,
   OnInit,
   output,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FitAddon } from '@xterm/addon-fit';
 import { Terminal as xtermTerminal } from '@xterm/xterm';
@@ -17,6 +18,7 @@ import { TerminalSize } from './terminal-size';
 @Component({
   selector: 'ngc-terminal',
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     :host {
       display: block;

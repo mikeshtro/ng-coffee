@@ -6,6 +6,7 @@ import {
   inject,
   model,
   OnDestroy,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { indentWithTab } from '@codemirror/commands';
 import { angular } from '@codemirror/lang-angular';
@@ -17,6 +18,7 @@ import { basicSetup } from 'codemirror';
 @Component({
   selector: 'ngc-editor',
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     :host {
       display: block;

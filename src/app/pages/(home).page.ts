@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -53,6 +53,7 @@ import { RouterLink } from '@angular/router';
       padding: 0.75rem 2rem;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterLink],
 })
 export default class HomePage {}

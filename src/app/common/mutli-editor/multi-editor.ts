@@ -1,4 +1,4 @@
-import { Component, computed, effect, model, signal } from '@angular/core';
+import { Component, computed, effect, model, signal, ChangeDetectionStrategy } from '@angular/core';
 
 import { Editor } from '../editor/editor';
 import { Tabs } from '../tabs/tabs';
@@ -33,6 +33,7 @@ import { FileContent } from './file-content';
     </div>
     <ngc-editor [value]="openFile?.content ?? ''" (valueChange)="updateFile($event)" />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     :host {
       display: grid;

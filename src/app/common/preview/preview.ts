@@ -1,4 +1,12 @@
-import { Component, computed, ElementRef, inject, input, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  viewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -22,6 +30,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     </span>
     <iframe #iframe [src]="iframeUrl()"></iframe>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     :host {
       display: flex;
