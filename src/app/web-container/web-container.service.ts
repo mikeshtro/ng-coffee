@@ -1,5 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { FileSystemTree, WebContainer, WebContainerProcess } from '@webcontainer/api';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class WebContainerService {
@@ -29,7 +30,7 @@ export class WebContainerService {
     return 'error.html';
   });
 
-  readonly processOutput = signal<string>('');
+  readonly processOutput$ = new BehaviorSubject<string>('');
 
   async boot(): Promise<void> {
     if (this.state() !== 'empty' && this.state() !== 'error') {
@@ -55,7 +56,7 @@ export class WebContainerService {
     }
 
     const process = await instance.spawn('jsh');
-    const reader = this.processOutput.set;
+    const reader = (value: string) => this.processOutput$.next(value);
     process.output.pipeTo(
       new WritableStream({
         write(data) {

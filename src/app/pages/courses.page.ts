@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   computed,
@@ -10,6 +11,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { DirectoryNode, FileNode, FileSystemTree, SymlinkNode } from '@webcontainer/api';
+import { map } from 'rxjs';
 import { FileContent } from '../common/mutli-editor/file-content';
 import { MultiEditor } from '../common/mutli-editor/multi-editor';
 import { Preview } from '../common/preview/preview';
@@ -21,7 +23,7 @@ import { WebContainerService } from '../web-container/web-container.service';
 
 @Component({
   selector: 'ngc-index-page',
-  imports: [RouterOutlet, Terminal, MultiEditor, Preview],
+  imports: [AsyncPipe, RouterOutlet, Terminal, MultiEditor, Preview],
   template: `
     <div class="instructions">
       <router-outlet />
@@ -33,7 +35,7 @@ import { WebContainerService } from '../web-container/web-container.service';
       </div>
       <ngc-terminal
         class="terminal"
-        [data]="terminalData()"
+        [data]="(terminalData$ | async) ?? { next: '' }"
         (dataChange)="setTerminalData($event)"
         (sizeChange)="resize($event)"
       />
@@ -81,7 +83,12 @@ export default class IndexPage implements OnInit {
 
   private readonly files = toSignal(this.fileLoaderService.files$);
 
-  protected readonly terminalData = this.webContainerService.processOutput;
+  // Using Observable and wrapping it into an object is intentional to notify on every emission,
+  // even if the emitted value is the same as the previous one. Every might contain a single letter
+  // and words can have repeating letters.
+  protected readonly terminalData$ = this.webContainerService.processOutput$.pipe(
+    map(data => ({ next: data }))
+  );
 
   protected readonly previewUrl = this.webContainerService.url;
 

@@ -29,7 +29,7 @@ import { TerminalSize } from './terminal-size';
 export class Terminal implements OnInit, OnDestroy {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
-  readonly data = input<string>();
+  readonly data = input<{ next: string }>();
 
   readonly sizeChange = output<TerminalSize>();
   readonly dataChange = output<string>();
@@ -51,7 +51,7 @@ export class Terminal implements OnInit, OnDestroy {
     effect(() => {
       const data = this.data();
       if (data != null) {
-        this.terminal.write(data);
+        this.terminal.write(data.next);
       }
     });
   }
