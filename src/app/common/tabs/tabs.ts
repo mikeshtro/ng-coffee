@@ -1,4 +1,4 @@
-import { Component, computed, input, model, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, input, model } from '@angular/core';
 
 @Component({
   selector: 'ngc-tabs',
@@ -9,7 +9,6 @@ import { Component, computed, input, model, ChangeDetectionStrategy } from '@ang
       </button>
     }
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     button {
       height: 2rem;

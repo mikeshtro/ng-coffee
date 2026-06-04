@@ -2,13 +2,11 @@ import {
   Component,
   effect,
   ElementRef,
-  HostListener,
   inject,
   input,
   OnDestroy,
   OnInit,
   output,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FitAddon } from '@xterm/addon-fit';
 import { Terminal as xtermTerminal } from '@xterm/xterm';
@@ -18,13 +16,15 @@ import { TerminalSize } from './terminal-size';
 @Component({
   selector: 'ngc-terminal',
   template: '',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     :host {
       display: block;
       border: var(--border);
     }
   `,
+  host: {
+    '(window:resize)': 'resize()',
+  },
 })
 export class Terminal implements OnInit, OnDestroy {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
@@ -56,7 +56,7 @@ export class Terminal implements OnInit, OnDestroy {
     });
   }
 
-  @HostListener('window:resize') resize(): void {
+  protected resize(): void {
     this.fitAddon.fit();
     this.sizeChange.emit({
       cols: this.terminal.cols,

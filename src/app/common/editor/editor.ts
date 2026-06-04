@@ -1,13 +1,4 @@
-import {
-  Component,
-  effect,
-  ElementRef,
-  HostBinding,
-  inject,
-  model,
-  OnDestroy,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, effect, ElementRef, inject, model, OnDestroy, signal } from '@angular/core';
 import { indentWithTab } from '@codemirror/commands';
 import { angular } from '@codemirror/lang-angular';
 import { javascript } from '@codemirror/lang-javascript';
@@ -18,7 +9,6 @@ import { basicSetup } from 'codemirror';
 @Component({
   selector: 'ngc-editor',
   template: '',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     :host {
       display: block;
@@ -32,17 +22,20 @@ import { basicSetup } from 'codemirror';
       max-width: var(--editor-width);
     }
   `,
+  host: {
+    '[style.--editor-height]': 'editorSize().height + "px"',
+    '[style.--editor-width]': 'editorSize().width + "px"',
+  },
 })
 export class Editor implements OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   readonly value = model<string>();
 
-  @HostBinding('style.--editor-height') editorHeight =
-    this.elementRef.nativeElement.getBoundingClientRect().height + 'px';
-
-  @HostBinding('style.--editor-width') editorWidth =
-    this.elementRef.nativeElement.getBoundingClientRect().width + 'px';
+  protected editorSize = signal({
+    width: this.elementRef.nativeElement.getBoundingClientRect().width,
+    height: this.elementRef.nativeElement.getBoundingClientRect().height,
+  });
 
   private readonly view = new EditorView({
     extensions: [
@@ -78,8 +71,10 @@ export class Editor implements OnDestroy {
       if (entry == null) {
         return;
       }
-      this.editorHeight = entry.contentRect.height + 'px';
-      this.editorWidth = entry.contentRect.width + 'px';
+      this.editorSize.set({
+        width: entry.contentRect.width,
+        height: entry.contentRect.height,
+      });
     });
     this.resizeObserver.observe(this.elementRef.nativeElement);
   }

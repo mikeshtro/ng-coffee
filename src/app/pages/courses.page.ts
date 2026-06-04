@@ -6,7 +6,6 @@ import {
   linkedSignal,
   OnInit,
   untracked,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
@@ -40,7 +39,6 @@ import { WebContainerService } from '../web-container/web-container.service';
       />
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     :host {
       height: 100%;
