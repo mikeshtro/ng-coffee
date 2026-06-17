@@ -39,6 +39,7 @@ yarn-error.log
 testem.log
 /typings
 public/angular-basics-2025
+public/angular-basics-2026
 public/angular-for-backend-developers
 **/node_modules
 

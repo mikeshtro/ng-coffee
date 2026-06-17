@@ -1,7 +1,9 @@
 import { angularBasics2025 } from './angular-basics-2025';
+import { angularBasics2026 } from './angular-basics-2026';
 import { angularForBackendDevelopers } from './angular-for-backend-developers';
 
 export const fileDictionary: Record<string, Record<string, string[]>> = {
   'angular-basics-2025': angularBasics2025,
+  'angular-basics-2026': angularBasics2026,
   'angular-for-backend-developers': angularForBackendDevelopers,
 };

@@ -6,6 +6,10 @@ import { RouterLink } from '@angular/router';
   template: `
     <h1>Welcome to MorniNG coffee</h1>
     <main>
+      <a class="link" routerLink="courses/angular-basics-2026/00-introduction">
+        <span>Angular basics</span>
+        <span>2026</span>
+      </a>
       <a class="link" routerLink="courses/angular-basics-2025/00-introduction">
         <span>Angular basics</span>
         <span>2025</span>
