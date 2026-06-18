@@ -48,6 +48,7 @@ Update App to get the data from the service
 - ];
 + private readonly coffeeService = inject(CoffeeService);
 + private readonly coffees$ = this.coffeeService.getCoffeePrices().pipe(catchError(() => EMPTY));
++ protected readonly coffees = toSignal(this.coffees$, { initialValue: [] });
 ```
 
 and update the component template to read the data
@@ -63,8 +64,7 @@ and update the component template to read the data
         [amount]="orderedCoffees.get(coffee.id)"
         (amountChange)="orderCoffee($event, coffee.id)"
       >
--       <span class="coffee">{{ coffee.id | uppercase}}</span>
-+        <span class="coffee">{{ coffee.id | uppercase }}</span>
+        <span class="coffee">{{ coffee.id | uppercase }}</span>
       </mcf-coffee-overview>
     }
   </div>
